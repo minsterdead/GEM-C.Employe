@@ -39,3 +39,5 @@ D:\GEM-C.Employe\obj\Debug\GEM_C_E.Properties.Resources.resources
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.csproj.GenerateResource.Cache
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.exe
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.pdb
+D:\GEM-C.Employe\obj\Debug\Views\ArretTempsView.baml
+D:\GEM-C.Employe\obj\Debug\Views\ArretTempsView.g.cs

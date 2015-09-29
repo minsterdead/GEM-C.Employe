@@ -12,24 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GEM_C_E.Service;
 
 namespace GEM_C_E.Views
 {
     /// <summary>
-    /// Logique d'interaction pour DemarrageTempsView.xaml
+    /// Logique d'interaction pour SommaireTempsView.xaml
     /// </summary>
-    public partial class DemarrageTempsView : UserControl
+    public partial class SommaireTempsView : UserControl
     {
-        public DemarrageTempsView()
+        public SommaireTempsView()
         {
             InitializeComponent();
-        }
-
-        private void Demarrer_Click(object sender, RoutedEventArgs e)
-        {
-            IApplicationService applicationService = ServiceFactory.Instance.GetService<IApplicationService>();
-            applicationService.ChangeView<ArretTempsView>(new ArretTempsView());
         }
     }
 }

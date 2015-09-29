@@ -56,8 +56,14 @@
     <Compile Include="Service\BaseViewModel.cs" />
     <Compile Include="Service\IApplicationService.cs" />
     <Compile Include="Service\ServiceFactory.cs" />
+    <Compile Include="Views\ArretTempsView.xaml.cs">
+      <DependentUpon>ArretTempsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DemarrageTempsView.xaml.cs">
       <DependentUpon>DemarrageTempsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SommaireTempsView.xaml.cs">
+      <DependentUpon>SommaireTempsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -71,7 +77,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ArretTempsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DemarrageTempsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SommaireTempsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

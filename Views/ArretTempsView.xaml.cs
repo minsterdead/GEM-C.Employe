@@ -17,19 +17,19 @@ using GEM_C_E.Service;
 namespace GEM_C_E.Views
 {
     /// <summary>
-    /// Logique d'interaction pour DemarrageTempsView.xaml
+    /// Logique d'interaction pour ArretTempsView.xaml
     /// </summary>
-    public partial class DemarrageTempsView : UserControl
+    public partial class ArretTempsView : UserControl
     {
-        public DemarrageTempsView()
+        public ArretTempsView()
         {
             InitializeComponent();
         }
 
-        private void Demarrer_Click(object sender, RoutedEventArgs e)
+        private void Arret_Click(object sender, RoutedEventArgs e)
         {
             IApplicationService applicationService = ServiceFactory.Instance.GetService<IApplicationService>();
-            applicationService.ChangeView<ArretTempsView>(new ArretTempsView());
+            applicationService.ChangeView<DemarrageTempsView>(new DemarrageTempsView());
         }
     }
 }

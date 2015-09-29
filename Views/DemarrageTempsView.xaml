@@ -8,10 +8,10 @@
 
     <Canvas>
         <Label Name="lblProjet" Height="25" Width="150" Margin="100,70" Content="Choix du Projet"></Label>
-        <ComboBox Name="lstProjet" Height="35" Width="300" Margin="100,100"></ComboBox>
+        <ComboBox Name="cblstProjet" Height="35" Width="300" Margin="100,100"></ComboBox>
         <Label Name="lblEmploye" Height="25" Width="150" Margin="100,150" Content="Choix de l'Employé"></Label>
-        <ComboBox Name="lstEmploye" Height="35" Width="300" Margin="100,175"></ComboBox>
-        <Button Name="btnDemarrer" Height="50" Width="200" Margin="25,300" Content="Démarrer"></Button>
+        <ComboBox Name="cblstEmploye" Height="35" Width="300" Margin="100,175"></ComboBox>
+        <Button Name="btnDemarrer" Height="50" Width="200" Margin="25,300" Content="Démarrer" Click="Demarrer_Click"></Button>
         <Button Name="btnSommaireTemps" Height="50" Width="200" Margin="275,300" Content="Sommaire temps"></Button>
     </Canvas>
 </UserControl>
