@@ -12,14 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GEM_C_E.Service;
 
 namespace GEM_C_E.Views
 {
     /// <summary>
     /// Logique d'interaction pour DemarrageTempsView.xaml
     /// </summary>
-    public partial class DemarrageTempsView : Page
+    public partial class DemarrageTempsView : UserControl
     {
         public DemarrageTempsView()
         {

@@ -1,11 +1,10 @@
-﻿<Page x:Class="GEM_C_E.Views.DemarrageTempsView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
-      d:DesignHeight="490" d:DesignWidth="500"
-	Title="DemarrageTempsView">
+﻿<UserControl x:Class="GEM_C_E.Views.DemarrageTempsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+              d:DesignHeight="490" d:DesignWidth="500">
 
     <Canvas>
         <Label Name="lblProjet" Height="25" Width="150" Margin="100,70" Content="Choix du Projet"></Label>
@@ -15,4 +14,4 @@
         <Button Name="btnDemarrer" Height="50" Width="200" Margin="25,300" Content="Démarrer"></Button>
         <Button Name="btnSommaireTemps" Height="50" Width="200" Margin="275,300" Content="Sommaire temps"></Button>
     </Canvas>
-</Page>
+</UserControl>
