@@ -13,20 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GEM_C_E.Service;
-using GEM_C_E.Views;
 
 namespace GEM_C_E
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IApplicationService
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
             Configure();
-            contentPresenter.Content = new DemarrageTempsView();
 
         }
 
@@ -35,9 +33,32 @@ namespace GEM_C_E
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
         }
 
-        public void ChangeView<T>(T view)
+        private void Employe_SeletChanged(object sender, SelectionChangedEventArgs e)
         {
-            contentPresenter.Content = view as UserControl;
+            if (cblstEmploye.SelectedIndex.ToString() == "1") {
+                lblProjet.Visibility = Visibility.Visible;
+                cblstProjet.Visibility = Visibility.Visible;
+                btnDemarrer.Visibility = Visibility.Visible;
+                btnArret.Visibility = Visibility.Hidden;
+            }
+            else {
+                lblProjet.Visibility = Visibility.Hidden;
+                cblstProjet.Visibility = Visibility.Hidden;
+                btnDemarrer.Visibility = Visibility.Hidden;
+                btnArret.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Demarrer_Click(object sender, RoutedEventArgs e)
+        {
+            lblProjet.Visibility = Visibility.Hidden;
+            cblstProjet.Visibility = Visibility.Hidden;
+            btnDemarrer.Visibility = Visibility.Hidden;
+        }
+
+        private void Arret_Click(object sender, RoutedEventArgs e)
+        {
+            btnArret.Visibility = Visibility.Hidden;
         }
     }
 }

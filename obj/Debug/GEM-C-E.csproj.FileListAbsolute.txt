@@ -29,9 +29,7 @@ D:\GEM-C.Employe\bin\Debug\GEM-C-E.exe
 D:\GEM-C.Employe\bin\Debug\GEM-C-E.pdb
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.csprojResolveAssemblyReference.cache
 D:\GEM-C.Employe\obj\Debug\MainWindow.baml
-D:\GEM-C.Employe\obj\Debug\Views\DemarrageTempsView.baml
 D:\GEM-C.Employe\obj\Debug\MainWindow.g.cs
-D:\GEM-C.Employe\obj\Debug\Views\DemarrageTempsView.g.cs
 D:\GEM-C.Employe\obj\Debug\App.g.cs
 D:\GEM-C.Employe\obj\Debug\GEM-C-E_MarkupCompile.cache
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.g.resources
@@ -39,5 +37,3 @@ D:\GEM-C.Employe\obj\Debug\GEM_C_E.Properties.Resources.resources
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.csproj.GenerateResource.Cache
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.exe
 D:\GEM-C.Employe\obj\Debug\GEM-C-E.pdb
-D:\GEM-C.Employe\obj\Debug\Views\ArretTempsView.baml
-D:\GEM-C.Employe\obj\Debug\Views\ArretTempsView.g.cs

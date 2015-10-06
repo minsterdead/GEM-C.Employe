@@ -2,9 +2,18 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="GEM-C.Employé" Height="500" Width="525">
-    <Grid>
-        <Grid>
-            <ContentPresenter Name="contentPresenter"></ContentPresenter>
-        </Grid>
-    </Grid>
+    <Canvas>
+        <Label Name="lblNomView" Height="50" Width="160" Margin="25,10" Content="Horodateur" FontSize="27" FontWeight="Bold"></Label>
+        <Label Name="lblEmploye" Height="25" Width="150" Margin="100,70" Content="Choix de l'Employé"></Label>
+        <ComboBox Name="cblstEmploye" Height="35" Width="300" Margin="100,100" SelectionChanged="Employe_SeletChanged">
+            <ComboBoxItem Name="B" Content="Bernard"></ComboBoxItem>
+            <ComboBoxItem Name="JP" Content="Jean-Paul"></ComboBoxItem>
+            <ComboBoxItem Name="J" Content="Jermene"></ComboBoxItem>
+            <ComboBoxItem Name="G" Content="Ginet"></ComboBoxItem>
+        </ComboBox>
+        <Label Name="lblProjet" Height="25" Width="150" Margin="100,175" Content="Choix du Projet" Visibility="Hidden"></Label>
+        <ComboBox Name="cblstProjet" Height="35" Width="300" Margin="100,200" Visibility="Hidden"></ComboBox>
+        <Button Name="btnDemarrer" Height="50" Width="200" Margin="150,275" Content="Démarrer" Click="Demarrer_Click" Visibility="Hidden"></Button>
+        <Button Name="btnArret" Height="50" Width="200" Margin="150,200" Content="Arrêt" Click="Arret_Click" Visibility="Hidden"></Button>
+    </Canvas>
 </Window>
