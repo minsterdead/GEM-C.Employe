@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GEM_C_E.Service
+namespace GEM_C_E.Models.Args
 {
-    public interface IApplicationService
+    public class RetrieveProjetArgs
     {
-        void ChangeView<T>(T view);
+        public int? IdEmploye { get; set; }
     }
 }

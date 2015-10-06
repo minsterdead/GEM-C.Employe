@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GEM_C_E.Service;
 
 namespace GEM_C_E
 {
@@ -24,41 +23,60 @@ namespace GEM_C_E
         public MainWindow()
         {
             InitializeComponent();
-            Configure();
-
-        }
-
-        private void Configure()
-        {
-            ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
+           
         }
 
         private void Employe_SeletChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cblstEmploye.SelectedIndex.ToString() == "1") {
-                lblProjet.Visibility = Visibility.Visible;
-                cblstProjet.Visibility = Visibility.Visible;
-                btnDemarrer.Visibility = Visibility.Visible;
-                btnArret.Visibility = Visibility.Hidden;
+                ChangedPropriete("D", true);
             }
             else {
-                lblProjet.Visibility = Visibility.Hidden;
-                cblstProjet.Visibility = Visibility.Hidden;
-                btnDemarrer.Visibility = Visibility.Hidden;
-                btnArret.Visibility = Visibility.Visible;
+                ChangedPropriete("A", true);
             }
         }
 
         private void Demarrer_Click(object sender, RoutedEventArgs e)
         {
-            lblProjet.Visibility = Visibility.Hidden;
-            cblstProjet.Visibility = Visibility.Hidden;
-            btnDemarrer.Visibility = Visibility.Hidden;
+            ChangedPropriete("D", false);
         }
 
         private void Arret_Click(object sender, RoutedEventArgs e)
         {
-            btnArret.Visibility = Visibility.Hidden;
+            ChangedPropriete("A", false);
+        }
+
+        private void ChangedPropriete(string DA, bool VH)
+        {
+            if (DA == "D") {
+                if (VH == true)
+                {
+                    lblProjet.Visibility = Visibility.Visible;
+                    cblstProjet.Visibility = Visibility.Visible;
+                    btnDemarrer.Visibility = Visibility.Visible;
+                    btnArret.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    lblProjet.Visibility = Visibility.Hidden;
+                    cblstProjet.Visibility = Visibility.Hidden;
+                    btnDemarrer.Visibility = Visibility.Hidden;
+                }
+            }
+            else if (DA == "A") {
+                if (VH == true)
+                {
+                    lblProjet.Visibility = Visibility.Hidden;
+                    cblstProjet.Visibility = Visibility.Hidden;
+                    btnDemarrer.Visibility = Visibility.Hidden;
+                    btnArret.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    btnArret.Visibility = Visibility.Hidden;
+                }
+            }
+            
         }
     }
 }
