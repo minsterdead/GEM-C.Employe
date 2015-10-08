@@ -9,7 +9,6 @@ namespace GEM_C_E.Service.Definitions
 {
     public interface IEmployeService
     {
-        IList<Employe> RetriveAll();
-
+        IList<Employe> RetrieveAll();
     }
 }

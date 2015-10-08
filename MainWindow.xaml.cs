@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,18 +15,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Cstj.MvvmToolkit.Services;
+using GEM_C_E.Models.Entities;
+using GEM_C_E.Service.Definitions;
+using GEM_C_E.Service.MySql;
 
 namespace GEM_C_E
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged, INotifyPropertyChanging
     {
+         
         public MainWindow()
         {
             InitializeComponent();
-           
+            DataContext = this;
+
+            ServiceFactory.Instance.Register<IEmployeService, MySqlEmploye>(new MySqlEmploye());
+            Employes = new ObservableCollection<Employe>(ServiceFactory.Instance.GetService<IEmployeService>().RetrieveAll());
         }
 
         private void Employe_SeletChanged(object sender, SelectionChangedEventArgs e)
@@ -46,6 +57,7 @@ namespace GEM_C_E
             ChangedPropriete("A", false);
         }
 
+        //Méthode qui permet d'activer ou de désactiviter la combobox des projet et bouton démarrer et arrêter
         private void ChangedPropriete(string DA, bool VH)
         {
             if (DA == "D") {
@@ -78,5 +90,61 @@ namespace GEM_C_E
             }
             
         }
+
+        #region Bindable
+        private ObservableCollection<Employe> _employe = new ObservableCollection<Employe>();
+
+        public ObservableCollection<Employe> Employes
+        {
+            get
+            {
+                return _employe;
+            }
+
+            set
+            {
+                if (_employe == value)
+                {
+                    return;
+                }
+                _employe = value;
+            }
+        }
+        #endregion
+
+        #region INotifyPropertyChanged INotifyPropertyChanging
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected PropertyChangedEventHandler PropertyChangedHandler
+        {
+            get { return PropertyChanged; }
+        }
+
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        protected PropertyChangingEventHandler PropertyChangingHandler
+        {
+            get { return PropertyChanging; }
+        }
+
+
+        protected virtual void RaisePropertyChanging([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangingEventArgs(propertyName));
+            }
+        }
+
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }

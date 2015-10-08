@@ -23,7 +23,7 @@ namespace GEM_C_E.Service.MySql
             { 
                 connexion = new MySqlConnexion();
 
-                string requete = "SELECT idEmploye, nom, prenom FROM Employes";
+                string requete = "SELECT idEmploye, CONCAT(prenom,' ', nom) as nom FROM Employes";
                 DataSet  dataset = connexion.Query(requete);
                 DataTable table = dataset.Tables[0];
 
@@ -33,8 +33,11 @@ namespace GEM_C_E.Service.MySql
                 }
             }
             catch (MySqlException)
+            {
+                throw ;
+            }
+            return result;
 
-            throw ;
         }
 
         private Employe ConstructEmploye (DataRow row)
@@ -42,8 +45,7 @@ namespace GEM_C_E.Service.MySql
             return new Employe()
             {
                 IdEmploye = (int)row["idEmploye"],
-                Nom = (string)row["nom"],
-                Prenom = (string)row["prenom"]
+                NomPrenom = (string)row["nom"]
             };
         }
     }
