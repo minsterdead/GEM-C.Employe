@@ -39,7 +39,11 @@ namespace GEM_C_E
 
         private void Employe_SeletChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cblstEmploye.SelectedIndex.ToString() == "1") {
+            int idEmploye = Convert.ToInt32(cblstEmploye.SelectedValue.ToString());
+
+            MySqlEmploye _EmployeService = new MySqlEmploye();
+
+            if (_EmployeService.VérifierDemArr(idEmploye)) {
                 ChangedPropriete("D", true);
             }
             else {
@@ -49,6 +53,8 @@ namespace GEM_C_E
 
         private void Demarrer_Click(object sender, RoutedEventArgs e)
         {
+            
+
             ChangedPropriete("D", false);
         }
 

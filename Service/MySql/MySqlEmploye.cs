@@ -48,5 +48,30 @@ namespace GEM_C_E.Service.MySql
                 NomPrenom = (string)row["nom"]
             };
         }
+
+        public bool VérifierDemArr(int IdEmploye) 
+        {
+            try
+            { 
+                connexion = new MySqlConnexion();
+
+                string requete = "SELECT * FROM CompteursTemps WHERE idEmploye = '" + IdEmploye + "' AND dateTimerEnd IS NULL";
+                DataSet dataset = connexion.Query(requete);
+                DataTable table = dataset.Tables[0];
+
+                if(table.Site == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
     }
 }

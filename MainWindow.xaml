@@ -5,8 +5,8 @@
     <Canvas>
         <Label Name="lblNomView" Height="50" Width="160" Margin="25,10" Content="Horodateur" FontSize="27" FontWeight="Bold"></Label>
         <Label Name="lblEmploye" Height="25" Width="150" Margin="100,70" Content="Choix de l'Employé"></Label>
-        <ComboBox Name="cblstEmploye" Height="35" Width="300" Margin="100,100" ItemsSource="{Binding Employes}"
-                  DisplayMemberPath="NomPrenom" SelectedValuePath="IdEmploye"/>
+        <ComboBox Name="cblstEmploye" Height="35" Width="300" Margin="100,100" SelectionChanged="Employe_SeletChanged" ItemsSource="{Binding Employes}"
+                  DisplayMemberPath="NomPrenom" SelectedValuePath="IdEmploye" SelectedValue="{Binding CEmployes}"/>
         <Label Name="lblProjet" Height="25" Width="150" Margin="100,175" Content="Choix du Projet" Visibility="Hidden"></Label>
         <ComboBox Name="cblstProjet" Height="35" Width="300" Margin="100,200" Visibility="Hidden"></ComboBox>
         <Button Name="btnDemarrer" Height="50" Width="200" Margin="150,275" Content="Démarrer" Click="Demarrer_Click" Visibility="Hidden"></Button>
