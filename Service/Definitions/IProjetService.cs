@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GEM_C_E.Models.Args;
 using GEM_C_E.Models.Entities;
 
 namespace GEM_C_E.Service.Definitions
 {
     public interface IProjetService
     {
-        IList<Projet> Retrieve(RetrieveProjetArgs args);
+        IList<Projet> Retrieve(int idEmploye);
     }
 }

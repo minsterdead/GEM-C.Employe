@@ -27,7 +27,7 @@ namespace GEM_C_E
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged, INotifyPropertyChanging
     {
-         
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,7 +44,11 @@ namespace GEM_C_E
             MySqlEmploye _EmployeService = new MySqlEmploye();
 
             if (_EmployeService.VérifierDemArr(idEmploye)) {
+
                 ChangedPropriete("D", true);
+
+                ServiceFactory.Instance.Register<IProjetService, MySqlProjet>(new MySqlProjet());
+                Projets = new ObservableCollection<Projet>(ServiceFactory.Instance.GetService<IProjetService>().Retrieve(idEmploye));
             }
             else {
                 ChangedPropriete("A", true);
@@ -53,8 +57,6 @@ namespace GEM_C_E
 
         private void Demarrer_Click(object sender, RoutedEventArgs e)
         {
-            
-
             ChangedPropriete("D", false);
         }
 
@@ -114,6 +116,25 @@ namespace GEM_C_E
                     return;
                 }
                 _employe = value;
+            }
+        }
+
+        private ObservableCollection<Projet> _projet = new ObservableCollection<Projet>();
+
+        public ObservableCollection<Projet> Projets
+        {
+            get
+            {
+                return _projet;
+            }
+
+            set
+            {
+                if (_projet == value)
+                {
+                    return;
+                }
+                _projet = value;
             }
         }
         #endregion

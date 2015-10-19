@@ -55,11 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\Args\RetrieveProjetArgs.cs" />
     <Compile Include="Service\Definitions\IEmployeService.cs" />
     <Compile Include="Service\Definitions\IProjetService.cs" />
     <Compile Include="Service\Helpers\MySqlConnexion.cs" />
     <Compile Include="Service\MySql\MySqlEmploye.cs" />
+    <Compile Include="Service\MySql\MySqlProjet.cs" />
     <Compile Include="Service\ServiceFactory.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
