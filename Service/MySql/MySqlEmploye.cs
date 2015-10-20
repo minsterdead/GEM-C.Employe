@@ -49,17 +49,42 @@ namespace GEM_C_E.Service.MySql
             };
         }
 
-        public bool VérifierDemArr(int IdEmploye) 
+        public void UpdateCompteurs(int idEmploye)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                StringBuilder req = new StringBuilder();
+                req.Append("UPDATE compteurstemps SET dateTimerEnd = '");
+                req.Append(DateTime.Now);
+                req.Append("' WHERE idEmploye = '");
+                req.Append(idEmploye);
+                req.Append("' AND dateTimerEnd IS NULL");
+
+                DataSet dataset = connexion.Query(req.ToString());
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
+
+        public bool VerifierDemArr(int IdEmploye) 
         {
             try
             { 
                 connexion = new MySqlConnexion();
 
-                string requete = "SELECT * FROM CompteursTemps WHERE idEmploye = '" + IdEmploye + "' AND dateTimerEnd IS NULL";
-                DataSet dataset = connexion.Query(requete);
+                StringBuilder req = new StringBuilder();
+                req.Append("SELECT * FROM compteurstemps WHERE idEmploye = '");
+                req.Append(IdEmploye);
+                req.Append("' AND dateTimerEnd IS NULL");
+
+                DataSet dataset = connexion.Query(req.ToString());
                 DataTable table = dataset.Tables[0];
 
-                if(table.Site == null)
+                if(table.Rows.Count == 0)
                 {
                     return true;
                 }

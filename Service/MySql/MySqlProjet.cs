@@ -52,5 +52,28 @@ namespace GEM_C_E.Service.MySql
                 Nom = (string)row["nom"]
             };
         }
+
+        public void  CreerTemps(int idEmploye, int idProjet)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                StringBuilder req = new StringBuilder();
+                req.Append("INSERT INTO compteurstemps (idEmploye, idProjet, dateTimerStart) VALUES ('");
+                req.Append(idEmploye);
+                req.Append("', '");
+                req.Append(idProjet);
+                req.Append("', '");
+                req.Append(DateTime.Now);
+                req.Append("')");
+
+                DataSet dataset = connexion.Query(req.ToString());
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
     }
 }

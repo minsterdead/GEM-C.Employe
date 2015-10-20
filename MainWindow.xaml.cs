@@ -27,6 +27,9 @@ namespace GEM_C_E
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged, INotifyPropertyChanging
     {
+        private int idEmploye;
+        private ObservableCollection<Projet> _projet = new ObservableCollection<Projet>();
+        private ObservableCollection<Employe> _employe = new ObservableCollection<Employe>();
 
         public MainWindow()
         {
@@ -34,20 +37,20 @@ namespace GEM_C_E
             DataContext = this;
 
             ServiceFactory.Instance.Register<IEmployeService, MySqlEmploye>(new MySqlEmploye());
+            ServiceFactory.Instance.Register<IProjetService, MySqlProjet>(new MySqlProjet());
             Employes = new ObservableCollection<Employe>(ServiceFactory.Instance.GetService<IEmployeService>().RetrieveAll());
         }
 
         private void Employe_SeletChanged(object sender, SelectionChangedEventArgs e)
         {
-            int idEmploye = Convert.ToInt32(cblstEmploye.SelectedValue.ToString());
+            idEmploye = Convert.ToInt32(cblstEmploye.SelectedValue.ToString());
 
             MySqlEmploye _EmployeService = new MySqlEmploye();
 
-            if (_EmployeService.VérifierDemArr(idEmploye)) {
+            if (_EmployeService.VerifierDemArr(idEmploye)) {
 
                 ChangedPropriete("D", true);
 
-                ServiceFactory.Instance.Register<IProjetService, MySqlProjet>(new MySqlProjet());
                 Projets = new ObservableCollection<Projet>(ServiceFactory.Instance.GetService<IProjetService>().Retrieve(idEmploye));
             }
             else {
@@ -57,12 +60,22 @@ namespace GEM_C_E
 
         private void Demarrer_Click(object sender, RoutedEventArgs e)
         {
+            int idProjet = Convert.ToInt32(cblstEmploye.SelectedValue.ToString());
+
+            MySqlProjet _ProjetService = new MySqlProjet();
+
+            _ProjetService.CreerTemps(idEmploye, idProjet);
+
             ChangedPropriete("D", false);
         }
 
         private void Arret_Click(object sender, RoutedEventArgs e)
         {
             ChangedPropriete("A", false);
+
+            MySqlEmploye _EmployeService = new MySqlEmploye();
+
+            _EmployeService.UpdateCompteurs(idEmploye);
         }
 
         //Méthode qui permet d'activer ou de désactiviter la combobox des projet et bouton démarrer et arrêter
@@ -100,7 +113,6 @@ namespace GEM_C_E
         }
 
         #region Bindable
-        private ObservableCollection<Employe> _employe = new ObservableCollection<Employe>();
 
         public ObservableCollection<Employe> Employes
         {
@@ -119,8 +131,6 @@ namespace GEM_C_E
             }
         }
 
-        private ObservableCollection<Projet> _projet = new ObservableCollection<Projet>();
-
         public ObservableCollection<Projet> Projets
         {
             get
@@ -134,7 +144,9 @@ namespace GEM_C_E
                 {
                     return;
                 }
+                RaisePropertyChanging();
                 _projet = value;
+                RaisePropertyChanged();
             }
         }
         #endregion
