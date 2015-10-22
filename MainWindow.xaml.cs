@@ -43,19 +43,26 @@ namespace GEM_C_E
 
         private void Employe_SeletChanged(object sender, SelectionChangedEventArgs e)
         {
-            idEmploye = Convert.ToInt32(cblstEmploye.SelectedValue.ToString());
+            if (cblstEmploye.SelectedIndex.ToString() != "-1")
+            {
 
-            MySqlEmploye _EmployeService = new MySqlEmploye();
+                idEmploye = Convert.ToInt32(cblstEmploye.SelectedValue.ToString());
 
-            if (_EmployeService.VerifierDemArr(idEmploye)) {
+                MySqlEmploye _EmployeService = new MySqlEmploye();
 
-                ChangedPropriete("D", true);
+                if (_EmployeService.VerifierDemArr(idEmploye))
+                {
 
-                Projets = new ObservableCollection<Projet>(ServiceFactory.Instance.GetService<IProjetService>().Retrieve(idEmploye));
+                    ChangedPropriete("D", true);
+
+                    Projets = new ObservableCollection<Projet>(ServiceFactory.Instance.GetService<IProjetService>().Retrieve(idEmploye));
+                }
+                else
+                {
+                    ChangedPropriete("A", true);
+                }
             }
-            else {
-                ChangedPropriete("A", true);
-            }
+            
         }
 
         private void Demarrer_Click(object sender, RoutedEventArgs e)
@@ -66,11 +73,16 @@ namespace GEM_C_E
 
             _ProjetService.CreerTemps(idEmploye, idProjet);
 
+            cblstProjet.SelectedIndex = -1;
+            cblstEmploye.SelectedIndex = -1;
+
             ChangedPropriete("D", false);
         }
 
         private void Arret_Click(object sender, RoutedEventArgs e)
         {
+            cblstEmploye.SelectedIndex = -1;
+
             ChangedPropriete("A", false);
 
             MySqlEmploye _EmployeService = new MySqlEmploye();
@@ -86,7 +98,6 @@ namespace GEM_C_E
                 {
                     lblProjet.Visibility = Visibility.Visible;
                     cblstProjet.Visibility = Visibility.Visible;
-                    btnDemarrer.Visibility = Visibility.Visible;
                     btnArret.Visibility = Visibility.Hidden;
                 }
                 else
@@ -185,5 +196,10 @@ namespace GEM_C_E
             }
         }
         #endregion
+
+        private void Projet_SeletChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnDemarrer.Visibility = Visibility.Visible;
+        }
     }
 }

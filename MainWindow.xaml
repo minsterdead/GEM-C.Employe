@@ -8,9 +8,15 @@
         <ComboBox Name="cblstEmploye" Height="35" Width="300" Margin="100,100" SelectionChanged="Employe_SeletChanged" ItemsSource="{Binding Employes}"
                   DisplayMemberPath="NomPrenom" SelectedValuePath="IdEmploye" SelectedValue="{Binding CEmployes}"/>
         <Label Name="lblProjet" Height="25" Width="150" Margin="100,175" Content="Choix du Projet" Visibility="Hidden"></Label>
-        <ComboBox Name="cblstProjet" Height="35" Width="300" Margin="100,200" Visibility="Hidden" ItemsSource="{Binding Projets}"
+        <ComboBox Name="cblstProjet" Height="35" Width="300" Margin="100,200" SelectionChanged="Projet_SeletChanged" Visibility="Hidden" ItemsSource="{Binding Projets}"
                   DisplayMemberPath="Nom" SelectedValuePath="IdProjet" SelectedValue="{Binding CProjets}"/>
         <Button Name="btnDemarrer" Height="50" Width="200" Margin="150,275" Content="Démarrer" Click="Demarrer_Click" Visibility="Hidden"></Button>
-        <Button Name="btnArret" Height="50" Width="200" Margin="150,200" Content="Arrêt" Click="Arret_Click" Visibility="Hidden"></Button>
+        <Button Name="btnArret" Height="50" Width="200" Margin="150,200" Content="Arrêt" Click="Arret_Click" Visibility="Visible"></Button>
+        <Label Name="lblNomProjet" Height="25" Width="100" Margin="50,300" Content="Nom du Projet : "></Label>
+        <Label Name="lblHeureCumul" Height="25" Width="100" Margin="200,300" Content="Heure Cumuler : "></Label>
+        <Label Name="lblHeureSession" Height="25" Width="100" Margin="350,300" Content="Heure de la Session : "></Label>
+        <TextBlock Name="txtbProjet" Height="25" Width="100" Margin="50,325"></TextBlock>
+        <TextBlock Name="txtbHeureCumul" Height="25" Width="100" Margin="200,325"></TextBlock>
+        <TextBlock Name="txtbHeureSession" Height="25" Width="100" Margin="350,325"></TextBlock>
     </Canvas>
 </Window>
