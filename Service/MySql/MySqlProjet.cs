@@ -48,14 +48,24 @@ namespace GEM_C_E.Service.MySql
 
         private Projet ConstructProjet (DataRow row)
         { 
-            return new Projet()
+            try
             {
-                IdProjet =  (int)row["idProjet"],
-                Nom = (string)row["nom"],
-                DateDebut = (DateTime)row["dateDebut"],
-                DateFin = (DateTime)row["dateFin"],
-                HeureCumuler =  Convert.ToSingle(row["temps"])
-            };
+                return new Projet()
+                {
+                    IdProjet = (int)row["idProjet"],
+                    Nom = (string)row["nom"],
+                    DateDebut = (DateTime)row["dateDebut"],
+                    DateFin = (DateTime)row["dateFin"],
+                    HeureCumuler = Convert.ToSingle(row["temps"])
+                };
+            }
+            catch(Exception e)
+            {
+                return new Projet()
+                {
+                };
+            }
+           
         }
 
         public void  CreerTemps(int idEmploye, int idProjet)
