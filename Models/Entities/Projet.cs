@@ -12,5 +12,6 @@ namespace GEM_C_E.Models.Entities
         public string Nom { get; set; }
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
+        public float HeureCumuler { get; set; }
     }
 }

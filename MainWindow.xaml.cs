@@ -107,6 +107,14 @@ namespace GEM_C_E
                     //
                     lblProjet.Visibility = Visibility.Visible;
                     cblstProjet.Visibility = Visibility.Visible;
+                    btnDemarrer.Visibility = Visibility.Hidden;
+                    //
+                    lblDateDebut.Visibility = Visibility.Hidden;
+                    lblDateFin.Visibility = Visibility.Hidden;
+                    lblHrCumul.Visibility = Visibility.Hidden;
+                    txtDateDebut.Visibility = Visibility.Hidden;
+                    txtDateFin.Visibility = Visibility.Hidden;
+                    txtHrCumul.Visibility = Visibility.Hidden;
                     //
                     btnArret.Visibility = Visibility.Hidden;
                     //
@@ -256,6 +264,7 @@ namespace GEM_C_E
                     {
                         txtDateDebut.Text = projet.DateDebut.ToString();
                         txtDateFin.Text = projet.DateFin.ToString();
+                        txtHrCumul.Text = Math.Round(projet.HeureCumuler, 2).ToString();
 
                         btnDemarrer.Visibility = Visibility.Visible;
                         //

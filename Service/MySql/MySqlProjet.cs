@@ -24,9 +24,11 @@ namespace GEM_C_E.Service.MySql
                 connexion = new MySqlConnexion();
 
                 StringBuilder req = new StringBuilder();
-                req.Append("SELECT p.idProjet, p.nom, p.dateDebut, p.dateFin FROM LiaisonProjetEmployes AS lpe INNER JOIN Projets AS p WHERE lpe.idProjet =");
+                req.Append("SELECT p.idProjet, p.nom, p.dateDebut, p.dateFin, SUM(TIMESTAMPDIFF( MINUTE, cp.dateTimerStart, cp.dateTimerEnd)/60) as temps ");
+                req.Append("FROM LiaisonProjetEmployes AS lpe INNER JOIN Projets AS p INNER JOIN compteurstemps as cp ");
+                req.Append("WHERE lpe.idProjet = '");
                 req.Append(idEmploye);
-                req.Append(" AND lpe.idProjet = p.idProjet");
+                req.Append("' AND lpe.idProjet = p.idProjet AND cp.idProjet = lpe.idProjet AND dateTimerEnd is not null");
 
                 DataSet dataset = connexion.Query(req.ToString());
                 DataTable table = dataset.Tables[0];
@@ -51,7 +53,8 @@ namespace GEM_C_E.Service.MySql
                 IdProjet =  (int)row["idProjet"],
                 Nom = (string)row["nom"],
                 DateDebut = (DateTime)row["dateDebut"],
-                DateFin = (DateTime)row["dateFin"]
+                DateFin = (DateTime)row["dateFin"],
+                HeureCumuler =  Convert.ToSingle(row["temps"])
             };
         }
 
