@@ -60,7 +60,15 @@ namespace GEM_C_E
                 else
                 {
                     ChangedPropriete("A", true);
-                }
+
+                    List<string> donnees = _EmployeService.RecupeDonnees(idEmploye);
+
+                    txtProjet.Text = donnees[0];
+                    float TempsCumul = Convert.ToSingle(donnees[2]);
+                    txtHeureCumul.Text = Math.Round(TempsCumul, 2).ToString(); 
+                    DateTime debutSession = Convert.ToDateTime(donnees[1]);
+                    txtHeureSession.Text = Math.Round((DateTime.Now - debutSession).TotalHours, 2).ToString();
+               }
             }
             
         }
@@ -96,28 +104,69 @@ namespace GEM_C_E
             if (DA == "D") {
                 if (VH == true)
                 {
+                    //
                     lblProjet.Visibility = Visibility.Visible;
                     cblstProjet.Visibility = Visibility.Visible;
+                    //
                     btnArret.Visibility = Visibility.Hidden;
+                    //
+                    lblNomProjet.Visibility = Visibility.Hidden;
+                    lblHeureCumul.Visibility = Visibility.Hidden;
+                    lblHeureSession.Visibility = Visibility.Hidden;
+                    txtProjet.Visibility = Visibility.Hidden;
+                    txtHeureCumul.Visibility = Visibility.Hidden;
+                    txtHeureSession.Visibility = Visibility.Hidden;
                 }
                 else
                 {
+                    //
                     lblProjet.Visibility = Visibility.Hidden;
                     cblstProjet.Visibility = Visibility.Hidden;
                     btnDemarrer.Visibility = Visibility.Hidden;
+                    //
+                    lblDateDebut.Visibility = Visibility.Hidden;
+                    lblDateFin.Visibility = Visibility.Hidden;
+                    lblHrCumul.Visibility = Visibility.Hidden;
+                    txtDateDebut.Visibility = Visibility.Hidden;
+                    txtDateFin.Visibility = Visibility.Hidden;
+                    txtHrCumul.Visibility = Visibility.Hidden;
                 }
             }
             else if (DA == "A") {
                 if (VH == true)
                 {
+                    //
+                    btnArret.Visibility = Visibility.Visible;
+                    //
+                    lblNomProjet.Visibility = Visibility.Visible;
+                    lblHeureCumul.Visibility = Visibility.Visible;
+                    lblHeureSession.Visibility = Visibility.Visible;
+                    txtProjet.Visibility = Visibility.Visible;
+                    txtHeureCumul.Visibility = Visibility.Visible;
+                    txtHeureSession.Visibility = Visibility.Visible;
+                    //
                     lblProjet.Visibility = Visibility.Hidden;
                     cblstProjet.Visibility = Visibility.Hidden;
                     btnDemarrer.Visibility = Visibility.Hidden;
-                    btnArret.Visibility = Visibility.Visible;
+                    //
+                    lblDateDebut.Visibility = Visibility.Hidden;
+                    lblDateFin.Visibility = Visibility.Hidden;
+                    lblHrCumul.Visibility = Visibility.Hidden;
+                    txtDateDebut.Visibility = Visibility.Hidden;
+                    txtDateFin.Visibility = Visibility.Hidden;
+                    txtHrCumul.Visibility = Visibility.Hidden;
                 }
                 else
                 {
+                    //
                     btnArret.Visibility = Visibility.Hidden;
+                    //
+                    lblNomProjet.Visibility = Visibility.Hidden;
+                    lblHeureCumul.Visibility = Visibility.Hidden;
+                    lblHeureSession.Visibility = Visibility.Hidden;
+                    txtProjet.Visibility = Visibility.Hidden;
+                    txtHeureCumul.Visibility = Visibility.Hidden;
+                    txtHeureSession.Visibility = Visibility.Hidden;
                 }
             }
             
@@ -199,7 +248,26 @@ namespace GEM_C_E
 
         private void Projet_SeletChanged(object sender, SelectionChangedEventArgs e)
         {
-            btnDemarrer.Visibility = Visibility.Visible;
+            foreach(Projet projet in Projets)
+            {
+                if (Convert.ToInt32(cblstProjet.SelectedIndex.ToString()) != -1)
+                {
+                    if (projet.IdProjet == Convert.ToInt32(cblstProjet.SelectedValue.ToString()))
+                    {
+                        txtDateDebut.Text = projet.DateDebut.ToString();
+                        txtDateFin.Text = projet.DateFin.ToString();
+
+                        btnDemarrer.Visibility = Visibility.Visible;
+                        //
+                        lblDateDebut.Visibility = Visibility.Visible;
+                        lblDateFin.Visibility = Visibility.Visible;
+                        lblHrCumul.Visibility = Visibility.Visible;
+                        txtDateDebut.Visibility = Visibility.Visible;
+                        txtDateFin.Visibility = Visibility.Visible;
+                        txtHrCumul.Visibility = Visibility.Visible;
+                    }
+                }
+            }
         }
     }
 }

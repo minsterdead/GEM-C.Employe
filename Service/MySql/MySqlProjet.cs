@@ -24,7 +24,7 @@ namespace GEM_C_E.Service.MySql
                 connexion = new MySqlConnexion();
 
                 StringBuilder req = new StringBuilder();
-                req.Append("SELECT p.idProjet, p.nom as nom FROM LiaisonProjetEmployes AS lpe INNER JOIN Projets AS p WHERE lpe.idProjet =");
+                req.Append("SELECT p.idProjet, p.nom, p.dateDebut, p.dateFin FROM LiaisonProjetEmployes AS lpe INNER JOIN Projets AS p WHERE lpe.idProjet =");
                 req.Append(idEmploye);
                 req.Append(" AND lpe.idProjet = p.idProjet");
 
@@ -49,7 +49,9 @@ namespace GEM_C_E.Service.MySql
             return new Projet()
             {
                 IdProjet =  (int)row["idProjet"],
-                Nom = (string)row["nom"]
+                Nom = (string)row["nom"],
+                DateDebut = (DateTime)row["dateDebut"],
+                DateFin = (DateTime)row["dateFin"]
             };
         }
 
