@@ -38,7 +38,16 @@ namespace GEM_C_E
 
             ServiceFactory.Instance.Register<IEmployeService, MySqlEmploye>(new MySqlEmploye());
             ServiceFactory.Instance.Register<IProjetService, MySqlProjet>(new MySqlProjet());
-            Employes = new ObservableCollection<Employe>(ServiceFactory.Instance.GetService<IEmployeService>().RetrieveAll());
+            try 
+            {
+                Employes = new ObservableCollection<Employe>(ServiceFactory.Instance.GetService<IEmployeService>().RetrieveAll());
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("l'accès à la BD est érroné");
+            }
+
+            
         }
 
         private void Employe_SeletChanged(object sender, SelectionChangedEventArgs e)
@@ -53,20 +62,32 @@ namespace GEM_C_E
                 if (_EmployeService.VerifierDemArr(idEmploye))
                 {
 
-                    ChangedPropriete("D", true);
-
                     Projets = new ObservableCollection<Projet>(ServiceFactory.Instance.GetService<IProjetService>().Retrieve(idEmploye));
+
+                    //Vérifie si des projets lui sont attribuer
+                    if(Projets[0].Nom != null)
+                        ChangedPropriete("D", true);
+                    else
+                    {
+                        MessageBox.Show("Vous n'avez pas de projet attribué");
+                        ChangedPropriete("D", true);
+                    }
+                        
+
                 }
                 else
                 {
                     ChangedPropriete("A", true);
 
+                    //Récupère les données a afficher
                     List<string> donnees = _EmployeService.RecupeDonnees(idEmploye);
 
+                    //Insert les données pour les afficher
                     txtProjet.Text = donnees[0];
                     float TempsCumul = Convert.ToSingle(donnees[2]);
-                    txtHeureCumul.Text = Math.Round(TempsCumul, 2).ToString(); 
+                    txtHeureCumul.Text = Math.Round(TempsCumul, 2).ToString();
                     DateTime debutSession = Convert.ToDateTime(donnees[1]);
+                    txtHeureDebut.Text = debutSession.ToString();
                     txtHeureSession.Text = Math.Round((DateTime.Now - debutSession).TotalHours, 2).ToString();
                }
             }
@@ -75,7 +96,7 @@ namespace GEM_C_E
 
         private void Demarrer_Click(object sender, RoutedEventArgs e)
         {
-            int idProjet = Convert.ToInt32(cblstEmploye.SelectedValue.ToString());
+            int idProjet = Convert.ToInt32(cblstProjet.SelectedValue.ToString());
 
             MySqlProjet _ProjetService = new MySqlProjet();
 
@@ -104,34 +125,36 @@ namespace GEM_C_E
             if (DA == "D") {
                 if (VH == true)
                 {
-                    //
+                    //Rend visible liste projet et enlève bouton démarrer
                     lblProjet.Visibility = Visibility.Visible;
                     cblstProjet.Visibility = Visibility.Visible;
                     btnDemarrer.Visibility = Visibility.Hidden;
-                    //
+                    //Enlève le status de démarrer
                     lblDateDebut.Visibility = Visibility.Hidden;
                     lblDateFin.Visibility = Visibility.Hidden;
                     lblHrCumul.Visibility = Visibility.Hidden;
                     txtDateDebut.Visibility = Visibility.Hidden;
                     txtDateFin.Visibility = Visibility.Hidden;
                     txtHrCumul.Visibility = Visibility.Hidden;
-                    //
+                    //Enlève le bouton Arrêter
                     btnArret.Visibility = Visibility.Hidden;
-                    //
+                    //Enlève le status arrêter
                     lblNomProjet.Visibility = Visibility.Hidden;
                     lblHeureCumul.Visibility = Visibility.Hidden;
+                    lblHeureDebut.Visibility = Visibility.Hidden;
                     lblHeureSession.Visibility = Visibility.Hidden;
                     txtProjet.Visibility = Visibility.Hidden;
                     txtHeureCumul.Visibility = Visibility.Hidden;
+                    txtHeureDebut.Visibility = Visibility.Hidden;
                     txtHeureSession.Visibility = Visibility.Hidden;
                 }
                 else
                 {
-                    //
+                    //Enlève la liste projet et bouton démarrer
                     lblProjet.Visibility = Visibility.Hidden;
                     cblstProjet.Visibility = Visibility.Hidden;
                     btnDemarrer.Visibility = Visibility.Hidden;
-                    //
+                    //Enlève le status démarrer
                     lblDateDebut.Visibility = Visibility.Hidden;
                     lblDateFin.Visibility = Visibility.Hidden;
                     lblHrCumul.Visibility = Visibility.Hidden;
@@ -143,20 +166,22 @@ namespace GEM_C_E
             else if (DA == "A") {
                 if (VH == true)
                 {
-                    //
+                    //Rend visible bouton arrêter
                     btnArret.Visibility = Visibility.Visible;
-                    //
+                    //Rend visible le status
                     lblNomProjet.Visibility = Visibility.Visible;
                     lblHeureCumul.Visibility = Visibility.Visible;
+                    lblHeureDebut.Visibility = Visibility.Visible;
                     lblHeureSession.Visibility = Visibility.Visible;
                     txtProjet.Visibility = Visibility.Visible;
                     txtHeureCumul.Visibility = Visibility.Visible;
+                    txtHeureDebut.Visibility = Visibility.Visible;
                     txtHeureSession.Visibility = Visibility.Visible;
-                    //
+                    //Enlève liste projet et bouton Démarrer
                     lblProjet.Visibility = Visibility.Hidden;
                     cblstProjet.Visibility = Visibility.Hidden;
                     btnDemarrer.Visibility = Visibility.Hidden;
-                    //
+                    //Enlève status démarrer
                     lblDateDebut.Visibility = Visibility.Hidden;
                     lblDateFin.Visibility = Visibility.Hidden;
                     lblHrCumul.Visibility = Visibility.Hidden;
@@ -166,14 +191,16 @@ namespace GEM_C_E
                 }
                 else
                 {
-                    //
+                    //Enlève bouton arrêter
                     btnArret.Visibility = Visibility.Hidden;
-                    //
+                    //Enlève status arrêter
                     lblNomProjet.Visibility = Visibility.Hidden;
                     lblHeureCumul.Visibility = Visibility.Hidden;
+                    lblHeureDebut.Visibility = Visibility.Hidden;
                     lblHeureSession.Visibility = Visibility.Hidden;
                     txtProjet.Visibility = Visibility.Hidden;
                     txtHeureCumul.Visibility = Visibility.Hidden;
+                    txtHeureDebut.Visibility = Visibility.Hidden;
                     txtHeureSession.Visibility = Visibility.Hidden;
                 }
             }
@@ -258,7 +285,7 @@ namespace GEM_C_E
         {
             foreach(Projet projet in Projets)
             {
-                if (Convert.ToInt32(cblstProjet.SelectedIndex.ToString()) != -1)
+                if (Convert.ToInt32(cblstProjet.SelectedIndex.ToString()) != -1 && Convert.ToInt32(cblstProjet.SelectedValue.ToString()) != 0)
                 {
                     if (projet.IdProjet == Convert.ToInt32(cblstProjet.SelectedValue.ToString()))
                     {

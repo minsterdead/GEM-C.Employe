@@ -15,18 +15,20 @@
         <Button Name="btnArret" Height="50" Width="200" Margin="150,200" Content="Arrêt" Click="Arret_Click" Visibility="Hidden"></Button>
         
         
-        <Label Name="lblNomProjet" Height="25" Width="100" Margin="50,300" Content="Nom du Projet : " Visibility="Hidden"></Label>
-        <Label Name="lblHeureCumul" Height="25" Width="100" Margin="200,300" Content="Heure Cumulées : " Visibility="Hidden"></Label>
-        <Label Name="lblHeureSession" Height="25" Width="120" Margin="350,300" Content="Heure de la Session : " Visibility="Hidden"></Label>
-        <TextBlock Name="txtProjet" Height="25" Width="100" Margin="50,325" Visibility="Hidden"></TextBlock>
-        <TextBlock Name="txtHeureCumul" Height="25" Width="100" Margin="200,325" Visibility="Hidden"></TextBlock>
-        <TextBlock Name="txtHeureSession" Height="25" Width="120" Margin="350,325" Visibility="Hidden"></TextBlock>
+        <Label Name="lblNomProjet" Height="25" Width="100" Margin="25,300" Content="Nom du Projet : " Visibility="Hidden"></Label>
+        <Label Name="lblHeureCumul" Height="25" Width="120" Margin="125,300" Content="Heure Cumulées : " Visibility="Hidden"></Label>
+        <Label Name="lblHeureDebut" Height="25" Width="130" Margin="235,300" Content="Heure Début Session : " Visibility="Hidden"></Label>
+        <Label Name="lblHeureSession" Height="25" Width="120" Margin="365,300" Content="Heure de la Session : " Visibility="Hidden"></Label>
+        <TextBlock Name="txtProjet" Height="25" Width="100" Margin="30,325" Visibility="Hidden"></TextBlock>
+        <TextBlock Name="txtHeureCumul" Height="25" Width="100" Margin="130,325" Visibility="Hidden"></TextBlock>
+        <TextBlock Name="txtHeureDebut" Height="25" Width="125" Margin="240,325" Visibility="Hidden"></TextBlock>
+        <TextBlock Name="txtHeureSession" Height="25" Width="120" Margin="370,325" Visibility="Hidden"></TextBlock>
 
         <Label Name="lblDateDebut" Height="25" Width="100" Margin="50,330" Content="Date Début : " Visibility="Hidden"></Label>
         <Label Name="lblDateFin" Height="25" Width="100" Margin="200,330" Content="Date Fin : " Visibility="Hidden"></Label>
         <Label Name="lblHrCumul" Height="25" Width="120" Margin="350,330" Content="Heure Cumulé : " Visibility="Hidden"></Label>
-        <TextBlock Name="txtDateDebut" Height="25" Width="125" Margin="50,355" Visibility="Hidden"></TextBlock>
-        <TextBlock Name="txtDateFin" Height="25" Width="125" Margin="200,355" Visibility="Hidden"></TextBlock>
-        <TextBlock Name="txtHrCumul" Height="25" Width="120" Margin="350,355" Visibility="Hidden"></TextBlock>
+        <TextBlock Name="txtDateDebut" Height="25" Width="125" Margin="55,355" Visibility="Hidden"></TextBlock>
+        <TextBlock Name="txtDateFin" Height="25" Width="125" Margin="205,355" Visibility="Hidden"></TextBlock>
+        <TextBlock Name="txtHrCumul" Height="25" Width="120" Margin="355,355" Visibility="Hidden"></TextBlock>
     </Canvas>
 </Window>
