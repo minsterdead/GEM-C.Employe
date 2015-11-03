@@ -96,18 +96,8 @@ namespace GEM_C_E.Service.MySql
                     }
                 }
 
-                StringBuilder requete = new StringBuilder();
-                requete.Append("SELECT SUM(TIMESTAMPDIFF( MINUTE, dateTimerStart, dateTimerEnd)/60) as temps FROM compteurstemps ");
-                requete.Append("WHERE idEmploye = '");
-                requete.Append(idEmploye);
-                requete.Append("' AND idProjet = '");
-                requete.Append(table.Rows[0][2]);
-                requete.Append("' AND dateTimerEnd IS NOT NULL");
 
-                dataset = connexion.Query(requete.ToString());
-                table = dataset.Tables[0];
-
-                donnees.Add(table.Rows[0][0].ToString());
+                donnees.Add(RecupHrCumul(idEmploye, Convert.ToInt32(table.Rows[0][2])).ToString());
 
             }
             catch (MySqlException)
@@ -116,6 +106,24 @@ namespace GEM_C_E.Service.MySql
             }
 
             return donnees;
+        }
+
+        public string RecupHrCumul(int idemploye, int idprojet)
+        {
+            connexion = new MySqlConnexion();
+
+            StringBuilder requete = new StringBuilder();
+            requete.Append("SELECT SUM(TIMESTAMPDIFF( MINUTE, dateTimerStart, dateTimerEnd)/60) as temps FROM compteurstemps ");
+            requete.Append("WHERE idEmploye = '");
+            requete.Append(idemploye);
+            requete.Append("' AND idProjet = '");
+            requete.Append(idprojet);
+            requete.Append("' AND dateTimerEnd IS NOT NULL");
+
+            DataSet dataset = connexion.Query(requete.ToString());
+            DataTable table = dataset.Tables[0];
+
+            return table.Rows[0][0].ToString();
         }
 
         public bool VerifierDemArr(int IdEmploye) 

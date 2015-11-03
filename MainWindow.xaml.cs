@@ -84,11 +84,18 @@ namespace GEM_C_E
 
                     //Insert les données pour les afficher
                     txtProjet.Text = donnees[0];
-                    float TempsCumul = Convert.ToSingle(donnees[2]);
-                    txtHeureCumul.Text = Math.Round(TempsCumul, 2).ToString();
+                    if(donnees[2] == " ")
+                    {
+                        float TempsCumul = Convert.ToSingle(donnees[2]);
+                        txtHeureCumul.Text = Math.Round(TempsCumul,0).ToString();
+                    }
+                    else 
+                    {
+                        txtHeureCumul.Text = "0";
+                    }
                     DateTime debutSession = Convert.ToDateTime(donnees[1]);
-                    txtHeureDebut.Text = debutSession.ToString();
-                    txtHeureSession.Text = Math.Round((DateTime.Now - debutSession).TotalHours, 2).ToString();
+                    txtHeureDebut.Text = String.Format("{0:MM/dd/yyyy}", debutSession);
+                    txtHeureSession.Text = Math.Round((DateTime.Now - debutSession).TotalHours, 0).ToString();
                }
             }
             
@@ -291,7 +298,7 @@ namespace GEM_C_E
                     {
                         txtDateDebut.Text = projet.DateDebut.ToString();
                         txtDateFin.Text = projet.DateFin.ToString();
-                        txtHrCumul.Text = Math.Round(projet.HeureCumuler, 2).ToString();
+                        txtHrCumul.Text = Math.Round(projet.HeureCumuler, 0).ToString();
 
                         btnDemarrer.Visibility = Visibility.Visible;
                         //
