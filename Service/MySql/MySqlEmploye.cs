@@ -23,7 +23,7 @@ namespace GEM_C_E.Service.MySql
             { 
                 connexion = new MySqlConnexion();
 
-                string requete = "SELECT idEmploye, CONCAT(prenom,' ', nom) as nom FROM Employes";
+                string requete = "SELECT idEmploye, CONCAT(prenom,' ', nom) as nom FROM Employes WHERE horsFonction = 0";
                 DataSet  dataset = connexion.Query(requete);
                 DataTable table = dataset.Tables[0];
 
