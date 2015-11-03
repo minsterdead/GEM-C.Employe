@@ -24,11 +24,13 @@ namespace GEM_C_E.Service.MySql
                 connexion = new MySqlConnexion();
 
                 StringBuilder req = new StringBuilder();
-                req.Append("SELECT p.idProjet, p.nom, p.dateDebut, p.dateFin, SUM(TIMESTAMPDIFF( MINUTE, cp.dateTimerStart, cp.dateTimerEnd)/60) as temps ");
-                req.Append("FROM LiaisonProjetEmployes AS lpe INNER JOIN Projets AS p INNER JOIN compteurstemps as cp ");
+                req.Append("SELECT p.idProjet, p.nom, p.dateDebut, p.dateFin ");
+                req.Append("FROM LiaisonProjetEmployes AS lpe INNER JOIN Projets AS p ");
                 req.Append("WHERE lpe.idEmploye = '");
                 req.Append(idEmploye);
-                req.Append("' AND lpe.idProjet = p.idProjet AND cp.idProjet = lpe.idProjet AND dateTimerEnd is not null");
+                req.Append("' AND p.idProjet = lpe.idProjet  AND etat != 'ABD' ");
+
+                //SUM(TIMESTAMPDIFF( MINUTE, cp.dateTimerStart, cp.dateTimerEnd)/60) as temps FROM INNER JOIN compteurstemps as cp WHERE cp.idProjet = lpe.idProjet AND dateTimerEnd is not null
 
                 DataSet dataset = connexion.Query(req.ToString());
                 DataTable table = dataset.Tables[0];
@@ -56,7 +58,6 @@ namespace GEM_C_E.Service.MySql
                     Nom = (string)row["nom"],
                     DateDebut = (DateTime)row["dateDebut"],
                     DateFin = (DateTime)row["dateFin"],
-                    HeureCumuler = Convert.ToSingle(row["temps"])
                 };
             }
             catch(Exception)

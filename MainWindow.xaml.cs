@@ -137,19 +137,25 @@ namespace GEM_C_E
                     cblstProjet.Visibility = Visibility.Visible;
                     btnDemarrer.Visibility = Visibility.Hidden;
                     //Enlève le status de démarrer
+                        //Label
                     lblDateDebut.Visibility = Visibility.Hidden;
                     lblDateFin.Visibility = Visibility.Hidden;
                     lblHrCumul.Visibility = Visibility.Hidden;
+                    lblHrCumulE.Visibility = Visibility.Hidden;
+                        //TextBlock
                     txtDateDebut.Visibility = Visibility.Hidden;
                     txtDateFin.Visibility = Visibility.Hidden;
                     txtHrCumul.Visibility = Visibility.Hidden;
+                    txtHrCumulE.Visibility = Visibility.Hidden;
                     //Enlève le bouton Arrêter
                     btnArret.Visibility = Visibility.Hidden;
                     //Enlève le status arrêter
+                        //Label
                     lblNomProjet.Visibility = Visibility.Hidden;
                     lblHeureCumul.Visibility = Visibility.Hidden;
                     lblHeureDebut.Visibility = Visibility.Hidden;
                     lblHeureSession.Visibility = Visibility.Hidden;
+                        //TextBlock
                     txtProjet.Visibility = Visibility.Hidden;
                     txtHeureCumul.Visibility = Visibility.Hidden;
                     txtHeureDebut.Visibility = Visibility.Hidden;
@@ -162,12 +168,16 @@ namespace GEM_C_E
                     cblstProjet.Visibility = Visibility.Hidden;
                     btnDemarrer.Visibility = Visibility.Hidden;
                     //Enlève le status démarrer
+                        //Label
                     lblDateDebut.Visibility = Visibility.Hidden;
                     lblDateFin.Visibility = Visibility.Hidden;
                     lblHrCumul.Visibility = Visibility.Hidden;
+                    lblHrCumulE.Visibility = Visibility.Hidden;
+                        //TextBlock
                     txtDateDebut.Visibility = Visibility.Hidden;
                     txtDateFin.Visibility = Visibility.Hidden;
                     txtHrCumul.Visibility = Visibility.Hidden;
+                    txtHrCumulE.Visibility = Visibility.Hidden;
                 }
             }
             else if (DA == "A") {
@@ -176,10 +186,12 @@ namespace GEM_C_E
                     //Rend visible bouton arrêter
                     btnArret.Visibility = Visibility.Visible;
                     //Rend visible le status
+                        //Label
                     lblNomProjet.Visibility = Visibility.Visible;
                     lblHeureCumul.Visibility = Visibility.Visible;
                     lblHeureDebut.Visibility = Visibility.Visible;
                     lblHeureSession.Visibility = Visibility.Visible;
+                        //TextBlock
                     txtProjet.Visibility = Visibility.Visible;
                     txtHeureCumul.Visibility = Visibility.Visible;
                     txtHeureDebut.Visibility = Visibility.Visible;
@@ -189,22 +201,28 @@ namespace GEM_C_E
                     cblstProjet.Visibility = Visibility.Hidden;
                     btnDemarrer.Visibility = Visibility.Hidden;
                     //Enlève status démarrer
+                        //Label
                     lblDateDebut.Visibility = Visibility.Hidden;
                     lblDateFin.Visibility = Visibility.Hidden;
                     lblHrCumul.Visibility = Visibility.Hidden;
+                    lblHrCumulE.Visibility = Visibility.Hidden;
+                        //TextBlock
                     txtDateDebut.Visibility = Visibility.Hidden;
                     txtDateFin.Visibility = Visibility.Hidden;
                     txtHrCumul.Visibility = Visibility.Hidden;
+                    txtHrCumulE.Visibility = Visibility.Hidden;
                 }
                 else
                 {
                     //Enlève bouton arrêter
                     btnArret.Visibility = Visibility.Hidden;
                     //Enlève status arrêter
+                        //Label
                     lblNomProjet.Visibility = Visibility.Hidden;
                     lblHeureCumul.Visibility = Visibility.Hidden;
                     lblHeureDebut.Visibility = Visibility.Hidden;
                     lblHeureSession.Visibility = Visibility.Hidden;
+                        //TextBlock
                     txtProjet.Visibility = Visibility.Hidden;
                     txtHeureCumul.Visibility = Visibility.Hidden;
                     txtHeureDebut.Visibility = Visibility.Hidden;
@@ -296,18 +314,29 @@ namespace GEM_C_E
                 {
                     if (projet.IdProjet == Convert.ToInt32(cblstProjet.SelectedValue.ToString()))
                     {
-                        txtDateDebut.Text = projet.DateDebut.ToString();
-                        txtDateFin.Text = projet.DateFin.ToString();
+                        MySqlEmploye _EmployeService = new MySqlEmploye();
+
+                        DateTime tmpDate = Convert.ToDateTime(projet.DateDebut.ToString());
+                        txtDateDebut.Text = String.Format("{0:MM/dd/yyyy}", tmpDate);
+                        tmpDate = Convert.ToDateTime(projet.DateFin.ToString());
+                        txtDateFin.Text = String.Format("{0:MM/dd/yyyy}", tmpDate);
                         txtHrCumul.Text = Math.Round(projet.HeureCumuler, 0).ToString();
+
+                        int tmp = Convert.ToInt32(cblstProjet.SelectedValue.ToString());
+                        float TempsCumul = Convert.ToSingle(_EmployeService.RecupHrCumul(idEmploye, tmp));
+
+                        txtHrCumulE.Text = Math.Round(TempsCumul, 0).ToString();
 
                         btnDemarrer.Visibility = Visibility.Visible;
                         //
                         lblDateDebut.Visibility = Visibility.Visible;
                         lblDateFin.Visibility = Visibility.Visible;
                         lblHrCumul.Visibility = Visibility.Visible;
+                        lblHrCumulE.Visibility = Visibility.Visible;
                         txtDateDebut.Visibility = Visibility.Visible;
                         txtDateFin.Visibility = Visibility.Visible;
                         txtHrCumul.Visibility = Visibility.Visible;
+                        txtHrCumulE.Visibility = Visibility.Visible;
                     }
                 }
             }
