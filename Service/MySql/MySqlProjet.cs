@@ -28,7 +28,7 @@ namespace GEM_C_E.Service.MySql
                 req.Append("FROM LiaisonProjetEmployes AS lpe INNER JOIN Projets AS p ");
                 req.Append("WHERE lpe.idEmploye = '");
                 req.Append(idEmploye);
-                req.Append("' AND p.idProjet = lpe.idProjet  AND etat != 'ABD' ");
+                req.Append("' AND p.idProjet = lpe.idProjet  AND etat = 'ECS' ");
 
                 //SUM(TIMESTAMPDIFF( MINUTE, cp.dateTimerStart, cp.dateTimerEnd)/60) as temps FROM INNER JOIN compteurstemps as cp WHERE cp.idProjet = lpe.idProjet AND dateTimerEnd is not null
 
@@ -37,7 +37,8 @@ namespace GEM_C_E.Service.MySql
 
                 foreach (DataRow projet in table.Rows)
                 {
-                    result.Add(ConstructProjet(projet));
+                    string tmp = (RecupHrProjet(projet[0].ToString()) != ""? RecupHrProjet(projet[0].ToString()) : "0");
+                    result.Add(ConstructProjet(projet, tmp));
                 }
             }
             catch (MySqlException)
@@ -48,7 +49,7 @@ namespace GEM_C_E.Service.MySql
             return result;
         }
 
-        private Projet ConstructProjet (DataRow row)
+        private Projet ConstructProjet (DataRow row, string tmp)
         { 
             try
             {
@@ -58,6 +59,7 @@ namespace GEM_C_E.Service.MySql
                     Nom = (string)row["nom"],
                     DateDebut = (DateTime)row["dateDebut"],
                     DateFin = (DateTime)row["dateFin"],
+                    HeureCumuler = Convert.ToSingle(tmp)
                 };
             }
             catch(Exception)
@@ -90,6 +92,22 @@ namespace GEM_C_E.Service.MySql
             {
                 throw;
             }
+        }
+
+        private string RecupHrProjet(string idprojet)
+        {
+            connexion = new MySqlConnexion();
+
+            StringBuilder requete = new StringBuilder();
+            requete.Append("SELECT SUM(TIMESTAMPDIFF( MINUTE, dateTimerStart, dateTimerEnd)/60) as temps FROM compteurstemps ");
+            requete.Append("WHERE idProjet = '");
+            requete.Append(idprojet);
+            requete.Append("' AND dateTimerEnd IS NOT NULL");
+
+            DataSet dataset = connexion.Query(requete.ToString());
+            DataTable table = dataset.Tables[0];
+
+            return table.Rows[0][0].ToString();
         }
     }
 }

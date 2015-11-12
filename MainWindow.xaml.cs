@@ -65,7 +65,7 @@ namespace GEM_C_E
                     Projets = new ObservableCollection<Projet>(ServiceFactory.Instance.GetService<IProjetService>().Retrieve(idEmploye));
 
                     //Vérifie si des projets lui sont attribuer
-                    if(Projets[0].Nom != null)
+                    if(Projets.Count() != 0)
                         ChangedPropriete("D", true);
                     else
                     {
@@ -323,7 +323,7 @@ namespace GEM_C_E
                         txtHrCumul.Text = Math.Round(projet.HeureCumuler, 0).ToString();
 
                         int tmp = Convert.ToInt32(cblstProjet.SelectedValue.ToString());
-                        float TempsCumul = Convert.ToSingle(_EmployeService.RecupHrCumul(idEmploye, tmp));
+                        float TempsCumul = Convert.ToSingle((_EmployeService.RecupHrCumul(idEmploye, tmp) != ""? _EmployeService.RecupHrCumul(idEmploye, tmp) : "0"));
 
                         txtHrCumulE.Text = Math.Round(TempsCumul, 0).ToString();
 
