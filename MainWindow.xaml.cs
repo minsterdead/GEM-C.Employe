@@ -84,7 +84,7 @@ namespace GEM_C_E
 
                     //Insert les données pour les afficher
                     txtProjet.Text = donnees[0];
-                    if(donnees[2] == " ")
+                    if(donnees[2] == "0")
                     {
                         float TempsCumul = Convert.ToSingle(donnees[2]);
                         txtHeureCumul.Text = Math.Round(TempsCumul,0).ToString();
@@ -95,7 +95,8 @@ namespace GEM_C_E
                     }
                     DateTime debutSession = Convert.ToDateTime(donnees[1]);
                     txtHeureDebut.Text = String.Format("{0:MM/dd/yyyy}", debutSession);
-                    txtHeureSession.Text = Math.Round((DateTime.Now - debutSession).TotalHours, 0).ToString();
+                    TimeSpan tmpdate = DateTime.Now - debutSession;
+                    txtHeureSession.Text = String.Format("{0:hh\\:mm}", tmpdate);
                }
             }
             
@@ -317,9 +318,9 @@ namespace GEM_C_E
                         MySqlEmploye _EmployeService = new MySqlEmploye();
 
                         DateTime tmpDate = Convert.ToDateTime(projet.DateDebut.ToString());
-                        txtDateDebut.Text = String.Format("{0:MM/dd/yyyy}", tmpDate);
+                        txtDateDebut.Text = String.Format("{0:yyyy/MM/dd}", tmpDate);
                         tmpDate = Convert.ToDateTime(projet.DateFin.ToString());
-                        txtDateFin.Text = String.Format("{0:MM/dd/yyyy}", tmpDate);
+                        txtDateFin.Text = String.Format("{0:yyyy/MM/dd}", tmpDate);
                         txtHrCumul.Text = Math.Round(projet.HeureCumuler, 0).ToString();
 
                         int tmp = Convert.ToInt32(cblstProjet.SelectedValue.ToString());
