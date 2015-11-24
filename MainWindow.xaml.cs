@@ -84,7 +84,7 @@ namespace GEM_C_E
 
                     //Insert les données pour les afficher
                     txtProjet.Text = donnees[0];
-                    if(donnees[2] == "0")
+                    if(donnees[2] != "")
                     {
                         float TempsCumul = Convert.ToSingle(donnees[2]);
                         txtHeureCumul.Text = Math.Round(TempsCumul,0).ToString();
@@ -94,12 +94,11 @@ namespace GEM_C_E
                         txtHeureCumul.Text = "0";
                     }
                     DateTime debutSession = Convert.ToDateTime(donnees[1]);
-                    txtHeureDebut.Text = String.Format("{0:MM/dd/yyyy}", debutSession);
+                    txtHeureDebut.Text = String.Format("{0:yyyy/MM/dd}", debutSession);
                     TimeSpan tmpdate = DateTime.Now - debutSession;
                     txtHeureSession.Text = String.Format("{0:hh\\:mm}", tmpdate);
                }
             }
-            
         }
 
         private void Demarrer_Click(object sender, RoutedEventArgs e)
