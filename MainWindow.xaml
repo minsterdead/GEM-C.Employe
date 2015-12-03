@@ -19,11 +19,11 @@
         <Button Name="btnArret" Height="50" Width="300" Margin="110,260" Content="Arrêt" Click="Arret_Click" Visibility="Hidden"></Button>
 
         <Rectangle Canvas.Top="320" Canvas.Left="0" Height="100" Width="525" Fill="#5f5f5f" Opacity="0.9"/>
-        <Label Name="lblNomProjet" Height="25" Width="120" Margin="100,175" FontFamily="Arial Black" Foreground="White" Content="Nom du Projet : " Visibility="Hidden"></Label>
+        <Label Name="lblNomProjet" Height="25" Width="120" Margin="100,175" FontFamily="Arial Black" Content="Nom du Projet : " Visibility="Hidden"></Label>
         <Label Name="lblHeureCumul" Height="25" Width="120" Margin="25,320" Foreground="White" Content="Heure Cumulées : " Visibility="Hidden"></Label>
         <Label Name="lblHeureDebut" Height="25" Width="130" Margin="180,320" Foreground="White" Content="Heure Début Session : " Visibility="Hidden"></Label>
         <Label Name="lblHeureSession" Height="25" Width="120" Margin="365,320" Foreground="White" Content="Heure de la Session : " Visibility="Hidden"></Label>
-        <TextBlock Name="txtProjet" Height="50" Width="300" Margin="110,200" Foreground="White" FontSize="25" TextAlignment="Center" Visibility="Hidden"></TextBlock>
+        <TextBlock Name="txtProjet" Height="50" Width="300" Margin="110,200" FontSize="25" TextAlignment="Center" Visibility="Hidden"></TextBlock>
         <TextBlock Name="txtHeureCumul" Height="25" Width="100" Margin="30,350" Foreground="White" Visibility="Hidden"></TextBlock>
         <TextBlock Name="txtHeureDebut" Height="25" Width="125" Margin="185,350" Foreground="White" Visibility="Hidden"></TextBlock>
         <TextBlock Name="txtHeureSession" Height="25" Width="120" Margin="370,350" Foreground="White" Visibility="Hidden"></TextBlock>
