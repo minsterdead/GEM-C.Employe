@@ -247,7 +247,9 @@ namespace GEM_C_E
                 {
                     return;
                 }
+                RaisePropertyChanging();
                 _employe = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -340,6 +342,11 @@ namespace GEM_C_E
                     }
                 }
             }
+        }
+
+        private void Refresh_Employe(object sender, EventArgs e)
+        {
+            Employes = new ObservableCollection<Employe>(ServiceFactory.Instance.GetService<IEmployeService>().RetrieveAll());
         }
     }
 }

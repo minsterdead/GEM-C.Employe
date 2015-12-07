@@ -9,7 +9,7 @@
 
         <Rectangle Canvas.Top="60" Canvas.Left="0" Height="260" Width="525" Fill="#fff3e5"/>
         <Label Name="lblEmploye" Height="30" Width="150" Margin="100,70" FontFamily="Arial Black" Content="Employé"></Label>
-        <ComboBox Name="cblstEmploye" Height="50" Width="400" Margin="60,100" FontSize="25" SelectionChanged="Employe_SeletChanged" ItemsSource="{Binding Employes}"
+        <ComboBox Name="cblstEmploye" Height="50" Width="400" Margin="60,100" FontSize="25" SelectionChanged="Employe_SeletChanged" DropDownOpened="Refresh_Employe" ItemsSource="{Binding Employes}"
                   DisplayMemberPath="NomPrenom" SelectedValuePath="IdEmploye" SelectedValue="{Binding CEmployes}"/>
         <Label Name="lblProjet" Height="25" Width="150" Margin="100,160" FontFamily="Arial Black" Content="Projet" Visibility="Hidden"></Label>
         <ComboBox Name="cblstProjet" Height="50" Width="400" Margin="60,185" FontSize="25" SelectionChanged="Projet_SeletChanged" Visibility="Hidden" ItemsSource="{Binding Projets}"
