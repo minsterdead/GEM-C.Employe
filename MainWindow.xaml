@@ -15,8 +15,12 @@
         <ComboBox Name="cblstProjet" Height="50" Width="400" Margin="60,185" FontSize="25" SelectionChanged="Projet_SeletChanged" Visibility="Hidden" ItemsSource="{Binding Projets}"
                   DisplayMemberPath="Nom" SelectedValuePath="IdProjet" SelectedValue="{Binding CProjets}"/>
 
-        <Button Name="btnDemarrer" Height="50" Width="300" Margin="110,260" Content="Démarrer" Click="Demarrer_Click" Visibility="Hidden"></Button>
-        <Button Name="btnArret" Height="50" Width="300" Margin="110,260" Content="Arrêt" Click="Arret_Click" Visibility="Hidden"></Button>
+        <Button Name="btnDemarrer" Height="50" Width="300" Margin="110,260" Content="Démarrer" Click="Demarrer_Click" Visibility="Hidden">
+            <Button.ToolTip>Démarre votre temps, vous ne pourrai pas en démarrer d'autre tant que vous ne l'avez pas arrêter.</Button.ToolTip>
+        </Button>
+        <Button Name="btnArret" Height="50" Width="300" Margin="110,260" Content="Arrêt" Click="Arret_Click" Visibility="Hidden">
+            <Button.ToolTip>Arrête votre temps, vous pouvez démarrer un notre temps.</Button.ToolTip>
+        </Button>
 
         <Rectangle Canvas.Top="320" Canvas.Left="0" Height="100" Width="525" Fill="#5f5f5f" Opacity="0.9"/>
         <Label Name="lblNomProjet" Height="25" Width="120" Margin="100,175" FontFamily="Arial Black" Content="Nom du Projet : " Visibility="Hidden"></Label>
